@@ -8,7 +8,8 @@ This repository describes the structure and format of the Skoltech3D dataset and
     [Paper (6 MB)](https://skoltech3d.appliedai.tech/data/skoltech3d.pdf)&nbsp;|
     [Supplementary text (2 MB)](https://skoltech3d.appliedai.tech/data/skoltech3d_supp.pdf)&nbsp;|
     [Supplementary results (101 MB)](https://skoltech3d.appliedai.tech/data/skoltech3d_supp_results.pdf)&nbsp;|
-    [arXiv](https://arxiv.org/abs/2203.06111)**
+    [arXiv](https://arxiv.org/abs/2203.06111)&nbsp;|
+    [Publisher version](https://doi.org/10.1109/CVPR52729.2023.02049)**
 
 
 
@@ -249,14 +250,30 @@ in the "Skoltech3D data" spreadsheet for the correspondence between the pieces o
 
 
 ## Download
-You can download the dataset on the [skoltech3d.appliedai.tech/data](https://skoltech3d.appliedai.tech/data/) page.
 The dataset is split into ZIP archives of sizes up to 25 GB based on the sensor, data modality, the scene, etc.
 Please refer to the column ["Chunk file"](https://docs.google.com/spreadsheets/d/1yWBtM93OdQHrsSKVG9Jp9t1Bz9FIOfJhDPLDPkcTXxo/edit#gid=0&range=E:E)
-in the "Skoltech3D data" spreadsheet for the correspondence between the pieces of the dataset and the names of the ZIP files.
+in the "Skoltech3D data" spreadsheet
+(or [this column](https://docs.google.com/spreadsheets/d/1yWBtM93OdQHrsSKVG9Jp9t1Bz9FIOfJhDPLDPkcTXxo/edit#gid=416285535&range=F:F) for addons)
+for the correspondence between the pieces of the dataset and the names of the ZIP files.
 
-![](https://img.shields.io/static/v1?label=&message=Coming%20soon&color=yellow)
+To download specific parts of the dataset you can generate the list of download links using
+[`make_links.py`](/src/sk3d/data/make_links.py) with a config file and then download the files, for example using `wget`:
+```bash
+export PYTHONPATH="../sk3d_data/src:$PYTHONPATH"  # where ../sk3d_data is the path to the root of the repository
 
-For convenience, we provide a python downloader to download specific parts of the dataset. 
+# Prints the list of links to stdout
+src/sk3d/data/make_links.py --conf conf.tsv
+
+# Downloads the files using wget
+src/sk3d/data/make_links.py --conf conf.tsv | xargs -n 1 sh -c 'wget --no-check-certificate $0'
+```
+See an example of the config file and the description of the format in [`conf.tsv`](/examples/conf.tsv).
+You can select a server to download the data from with the `--server` parameter of `make_links.py`:
+see `make_links.py -h` for the available options.
+We recommend using the default server for the best download speed.
+
+Alternatively, you can download the files manually using a slower server
+from the [skoltech3d.appliedai.tech/data](https://skoltech3d.appliedai.tech/data/) page.
 
 
 
@@ -268,5 +285,7 @@ To evaluate a 3D reconstruction method on Skoltech3D please follow the instructi
 
 
 ## Changelog
-#### 2023 Aug 16
+#### v1.1.0, 2023 Dec 30
+- Added the script for generation of download links.
+#### v1.0.0, 2023 Aug 16
 - Initial release of the documentation.

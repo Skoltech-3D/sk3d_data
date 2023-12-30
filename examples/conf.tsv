@@ -1,0 +1,100 @@
+# -----------------------------------------------------------------------------------------------------
+# An example of the config file for make_links.py,
+# which specifies the parts of the dataset to download and the list of scenes to download the data for.
+#
+# Empty lines and comment-lines starting with '#' are ignored.
+#
+# The first nonempty non-comment line specifices the list of scenes to download the data for.
+# It must start with 'scenes = ' followed by a space separated list of scene names.
+# You can find the list of available scene names in src/sk3d/data/dataset/scenes.py.
+# -----------------------------------------------------------------------------------------------------
+scenes = dragon skate
+
+# To get the links for all scenes set
+# scenes = all
+
+
+# ---------------------------------------------------------------------------------------------------------------------
+# The remaining lines specify the parts of the dataset to download.
+# You can simply select the lines from the "Skoltech3D data" spreadsheet that correspond to the parts
+# you want to download and copy them here, or uncomment the respective lines in this example.
+#
+# The lines that do not contain any chunk file name are ignored.
+# A chunk file name is a sequence of characters without spaces that ends with '.zip',
+# e.g 'dataset.all.stl.occluded_space.zip'.
+# Only the first filename in the line is used.
+# The filenames containing '{scene}' represent a pattern, which is repeated for each scene in the list specified above.
+# ---------------------------------------------------------------------------------------------------------------------
+
+# Structured-light data
+# 	Full scan		dataset/{scene}/stl/reconstruction/cleaned.ply	dataset.all.stl.reconstruction.cleaned.zip
+# 	Partial scans		dataset/{scene}/stl/partial/aligned/{scan_i:04}.ply	dataset.{scene}.stl.partial.aligned.zip
+# 	Validation scans		dataset/{scene}/stl/validation/aligned/{val_scan_i:04}.ply	dataset.all.stl.validation.aligned.zip
+# 	Occluding surface		dataset/{scene}/stl/occluded_space.ply	dataset.all.stl.occluded_space.zip
+# RGB images
+# 	Undistorted
+		TIS R	dataset/{scene}/tis_right/rgb/undistorted/{light}/{pos_i:04}.png	dataset.{scene}.tis_right.rgb.undistorted.zip
+# 		TIS L	dataset/{scene}/tis_left/rgb/undistorted/{light}/{pos_i:04}.png	dataset.{scene}.tis_left.rgb.undistorted.zip
+# 		Kinect	dataset/{scene}/kinect_v2/rgb/undistorted/{light}/{pos_i:04}.png	dataset.{scene}.kinect_v2.rgb.undistorted.zip
+# 		RealSense	dataset/{scene}/real_sense/rgb/undistorted/{light}/{pos_i:04}.png	dataset.{scene}.real_sense.rgb.undistorted.zip
+# 		Phone R	dataset/{scene}/phone_right/rgb/undistorted/{light}/{pos_i:04}.jpg	dataset.{scene}.phone_right.rgb.undistorted.zip
+# 		Phone L	dataset/{scene}/phone_left/rgb/undistorted/{light}/{pos_i:04}.jpg	dataset.{scene}.phone_left.rgb.undistorted.zip
+# 	Raw
+# 		TIS R	raw/{scene}/tis_right/rgb/raw/{light}/{pos_i:04}.png	raw.{scene}.tis_right.rgb.raw.zip
+# 		TIS L	raw/{scene}/tis_left/rgb/raw/{light}/{pos_i:04}.png	raw.{scene}.tis_left.rgb.raw.zip
+# 		Kinect	raw/{scene}/kinect_v2/rgb/raw/{light}/{pos_i:04}.png	raw.{scene}.kinect_v2.rgb.raw.zip
+# 		RealSense	raw/{scene}/real_sense/rgb/raw/{light}/{pos_i:04}.png	raw.{scene}.real_sense.rgb.raw.zip
+# 		Phone R	raw/{scene}/phone_right/rgb/raw/{light}/{pos_i:04}.jpg	raw.{scene}.phone_right.rgb.raw.zip
+# 		Phone L	raw/{scene}/phone_left/rgb/raw/{light}/{pos_i:04}.jpg	raw.{scene}.phone_left.rgb.raw.zip
+# Depth maps
+# 	Undistorted
+# 		Kinect	dataset/{scene}/kinect_v2/depth/undistorted/{pos_i:04}.png	dataset.all.kinect_v2.depth.undistorted.zip
+# 		Phone R	dataset/{scene}/phone_right/depth/undistorted/{pos_i:04}.png	dataset.all.phone_right.depth.undistorted.zip
+# 		Phone L	dataset/{scene}/phone_left/depth/undistorted/{pos_i:04}.png	dataset.all.phone_left.depth.undistorted.zip
+# 		RealSense	dataset/{scene}/real_sense/depth/undistorted/{light}/{pos_i:04}.png	dataset.{scene}.real_sense.depth.undistorted.zip
+# 	Raw
+# 		Kinect	raw/{scene}/kinect_v2/depth/raw/{pos_i:04}.png	raw.all.kinect_v2.depth.raw.zip
+# 		Phone R	raw/{scene}/phone_right/depth/raw/{pos_i:04}.png	raw.all.phone_right.depth.raw.zip
+# 		Phone L	raw/{scene}/phone_left/depth/raw/{pos_i:04}.png	raw.all.phone_left.depth.raw.zip
+# 		RealSense	raw/{scene}/real_sense/depth/raw/{light}/{pos_i:04}.png	raw.{scene}.real_sense.depth.raw.zip
+# IR images
+# 	Undistorted
+# 		Kinect	dataset/{scene}/kinect_v2/ir/undistorted/{pos_i:04}.png	dataset.all.kinect_v2.ir.undistorted.zip
+# 		Phone R	dataset/{scene}/phone_right/ir/undistorted/{pos_i:04}.png	dataset.all.phone_right.ir.undistorted.zip
+# 		Phone L	dataset/{scene}/phone_left/ir/undistorted/{pos_i:04}.png	dataset.all.phone_left.ir.undistorted.zip
+# 		RealSense	dataset/{scene}/real_sense/ir/undistorted/{light}/{pos_i:04}.png	dataset.{scene}.real_sense.ir.undistorted.zip
+# 		RealSense right IR	dataset/{scene}/real_sense/ir_right/undistorted/{light}/{pos_i:04}.png	dataset.{scene}.real_sense.ir_right.undistorted.zip
+# 	Raw
+# 		Kinect	raw/{scene}/kinect_v2/ir/raw/{pos_i:04}.png	raw.all.kinect_v2.ir.raw.zip
+# 		Phone R	raw/{scene}/phone_right/ir/raw/{pos_i:04}.png	raw.all.phone_right.ir.raw.zip
+# 		Phone L	raw/{scene}/phone_left/ir/raw/{pos_i:04}.png	raw.all.phone_left.ir.raw.zip
+# 		RealSense	raw/{scene}/real_sense/ir/raw/{light}/{pos_i:04}.png	raw.{scene}.real_sense.ir.raw.zip
+# 		RealSense right IR	raw/{scene}/real_sense/ir_right/raw/{light}/{pos_i:04}.png	raw.{scene}.real_sense.ir_right.raw.zip
+Calibration				dataset.all.calibration.zip
+# 	Camera poses		dataset/{scene}/{cam}/{mode}/images.txt
+# 	Pinhole camera models		dataset/calibration/{cam}/{mode}/cameras.txt
+# 	Central generic cam models		dataset/calibration/{cam}/{mode}/intrinsics.yaml
+# 	Depth undistortion models		dataset/calibration/{cam}/{mode}/undistortion.pt
+
+# Addons
+# ------
+# Camera parameters in different formats
+# 	MVSNet		Only TIS R	addons/{scene}/{cam}/{mode}/mvsnet_input	addons.all.mvsnet_input.zip
+# 		Camera parameters		addons/{scene}/{cam}/{mode}/mvsnet_input/{pos_i:08}_cam.txt
+# 		View selection scores		addons/{scene}/{cam}/{mode}/mvsnet_input/pair.txt
+# 	IDR		Only TIS R	addons/{scene}/{cam}/{mode}/idr_input/cameras.npz	addons.all.idr_input.zip
+# Structured-light depth maps
+# 	W/o antialiasing
+# 		At TIS R		addons/{scene}/proj_depth/stl.clean_rec@tis_right.undist/{pos_i:04}.png	addons.all.proj_depth.stl.clean_rec@tis_right.undist.zip
+# 		At TIS L		addons/{scene}/proj_depth/stl.clean_rec@tis_left.undist/{pos_i:04}.png	addons.all.proj_depth.stl.clean_rec@tis_left.undist.zip
+# 		At Kinect IR		addons/{scene}/proj_depth/stl.clean_rec@kinect_v2_ir.undist/{pos_i:04}.png	addons.all.proj_depth.stl.clean_rec@kinect_v2_ir.undist.zip
+# 		At RealSense IR		addons/{scene}/proj_depth/stl.clean_rec@real_sense_ir.undist/{pos_i:04}.png	addons.all.proj_depth.stl.clean_rec@real_sense_ir.undist.zip
+# 		At Phone R IR		addons/{scene}/proj_depth/stl.clean_rec@phone_right_ir.undist/{pos_i:04}.png	addons.all.proj_depth.stl.clean_rec@phone_right_ir.undist.zip
+# 		At Phone L IR		addons/{scene}/proj_depth/stl.clean_rec@phone_left_ir.undist/{pos_i:04}.png	addons.all.proj_depth.stl.clean_rec@phone_left_ir.undist.zip
+# 	With antialiasing
+# 		At TIS R		addons/{scene}/proj_depth/stl.clean_rec.aa@tis_right.undist/{pos_i:04}.png	addons.all.proj_depth.stl.clean_rec.aa@tis_right.undist.zip
+# 		At TIS L		addons/{scene}/proj_depth/stl.clean_rec.aa@tis_left.undist/{pos_i:04}.png	addons.all.proj_depth.stl.clean_rec.aa@tis_left.undist.zip
+# 		At Kinect IR		addons/{scene}/proj_depth/stl.clean_rec.aa@kinect_v2_ir.undist/{pos_i:04}.png	addons.all.proj_depth.stl.clean_rec.aa@kinect_v2_ir.undist.zip
+# 		At RealSense IR		addons/{scene}/proj_depth/stl.clean_rec.aa@real_sense_ir.undist/{pos_i:04}.png	addons.all.proj_depth.stl.clean_rec.aa@real_sense_ir.undist.zip
+# 		At Phone R IR		addons/{scene}/proj_depth/stl.clean_rec.aa@phone_right_ir.undist/{pos_i:04}.png	addons.all.proj_depth.stl.clean_rec.aa@phone_right_ir.undist.zip
+# 		At Phone L IR		addons/{scene}/proj_depth/stl.clean_rec.aa@phone_left_ir.undist/{pos_i:04}.png	addons.all.proj_depth.stl.clean_rec.aa@phone_left_ir.undist.zip
